@@ -1,0 +1,266 @@
+/*=============== GOOGLE FONTS ===============*/
+@import url('https://fonts.googleapis.com/css2?family=Spartan:wght@700&display=swap');
+
+/*=============== VARIABLES CSS ===============*/
+:root {
+  /*========== Colors ==========*/
+  /* Background */
+  --background-color: hsl(222, 26%, 31%);
+  --selector-background-color: hsl(223, 31%, 20%);
+  --input-background-color: hsl(224, 36%, 15%);
+
+  /* Text */
+  --text-color: hsl(221, 14%, 31%);
+  --white-color: rgb(255, 255, 255);
+
+  /* Keys */
+  --red-key-color: hsl(6, 63%, 50%);
+  --blue-key-color: hsl(225, 21%, 49%);
+  --grey-key-color: hsl(30, 25%, 89%);
+
+  /* Shadow */
+  --red-key-shadow-color: hsl(6, 70%, 34%);
+  --blue-key-shadow-color: hsl(224, 28%, 35%);
+  --grey-key-shadow-color: hsl(28, 16%, 65%);
+  
+  /*========== Font and typography ==========*/
+  --body-font: 'Spartan', sans-serif;
+  --biggest-font-size: 3rem;
+  --bigger-font-size: 2.5rem;
+  --big-font-size: 2rem;
+  --h1-font-size: 1.7rem;
+  --h2-font-size: 1.35rem;
+  --h3-font-size: 1.125rem;
+  --normal-font-size: .938rem;
+  --small-font-size: .813rem;
+  --smaller-font-size: .75rem;
+  --smallest-font-size: .70rem;
+  --text-line-height: 2rem;
+
+  /*========== Font weight ==========*/
+  --font-bold: 700;
+
+  /*========== Margenes ==========*/
+  --m-0-25: .25rem;
+  --m-0-5: .5rem;
+  --m-0-75: .75rem;
+  --m-1: 1rem;
+  --m-1-5: 1.5rem;
+  --m-2: 2rem;
+  --m-2-5: 2.5rem;
+  --m-3: 3rem;
+  --m-3-5: 3.5rem;
+
+  /*========== z index ==========*/
+  --z-tooltip: 10;
+  --z-fixed: 100;
+}
+
+/*=============== BASE ===============*/
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: var(--background-color);
+}
+
+body {
+  font-family: var(--body-font);
+  display: grid;
+  justify-content: center;
+}
+
+h1,h2,h3 {
+  font-family: var(--body-font);
+}
+
+ul {
+  list-style-type: none;
+}
+
+a {
+  font-family: var(--body-font);
+  text-decoration: none;
+}
+
+button,
+input {
+  font-family: var(--body-font);
+  border: none;
+  outline: none;
+}
+
+button {
+  cursor: pointer;
+}
+
+img {
+  max-width: 100%;
+}
+
+span {
+  font-size: var(--normal-font-size);
+  line-height: 1.6rem;
+  text-align: center;
+  margin: 0;
+}
+
+/*=============== REUSABLE CSS CLASSES ===============*/
+.section {
+  padding: 0;
+  margin-bottom: 5rem;
+}
+
+.button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: var(--h1-font-size);
+  border-radius: var(--m-0-5);
+  background-color: var(--grey-key-color);
+  color: var(--text-color);
+  box-shadow: 0px 4px var(--grey-key-shadow-color);
+  transition: .5s;
+}
+
+.button:active {
+  transform: translate(0px, 4px);
+  box-shadow: 0px 0px var(--grey-key-shadow-color)
+}
+
+/*=============== LAYOUT ===============*/
+
+.main {
+  overflow: hidden; /* For animation and images*/
+}
+
+.grid {
+  display: grid;
+}
+
+/*=============== HEADER ===============*/
+.header {
+  margin-top: var(--m-1-5);
+  margin-bottom: var(--m-1);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  max-width: 350px;
+}
+
+.header__logo {
+  font-size: var(--big-font-size);
+  color: var(--white-color);
+}
+
+.header__theme {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--m-1);
+}
+
+.header__theme-title {
+  font-size: var(--smallest-font-size);
+  margin-bottom: var(--m-0-25);
+  letter-spacing: .08rem;
+  color: var(--white-color);
+}
+
+.header__selector{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.header__step {
+  display: flex;
+  gap: var(--m-1);
+}
+
+.header__step-number {
+  font-size: var(--smallest-font-size);
+  color: var(--white-color);
+}
+
+.header__selector-scroll {
+  background-color: var(--selector-background-color);
+  border-radius: var(--m-1);
+  width: 68px;
+  padding: 13px;
+}
+
+.header__selector-scroll:before {
+  content: '';
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border-radius: 1rem;
+  background-color: var(--red-key-color);
+  transform: translate(-9px, -8px);
+}
+
+
+/*=============== CALCULATOR OUTPUT ===============*/
+.calculator__output {
+  display: flex;
+  justify-content: flex-end;
+  background-color: var(--input-background-color);
+  border-radius:var(--m-0-75);
+  padding: var(--m-1-5) var(--m-2);
+  margin: var(--m-1-5) 0;
+}
+
+.calculator__output-operand {
+  font-size: var(--h1-font-size);
+  color: var(--white-color);
+}
+
+/*=============== CALCULATOR BODY ===============*/
+.calculator__body {
+  display: grid;
+  justify-content: center;
+  background-color: var(--selector-background-color);
+  border-radius: var(--m-0-75);
+  padding: var(--m-1-5);
+  grid-template-columns: repeat(4, 60px);
+  grid-template-rows: repeat(5, 60px);
+  gap: var(--m-1);
+}
+
+.span-two {
+  grid-column: span 2;
+}
+
+.blue {
+  color: var(--white-color);
+  font-size: var(--normal-font-size);
+  background-color: var(--blue-key-color);
+  box-shadow: 0px 4px var(--blue-key-shadow-color);
+}
+
+.blue:active {
+  box-shadow: 0px 0px var(--blue-key-shadow-color);
+}
+
+.red {
+  font-size: var(--h3-font-size);
+  color: var(--white-color);
+  background-color: var(--red-key-color);
+  box-shadow: 0px 4px var(--red-key-shadow-color);
+}
+
+.red:active {
+  box-shadow: 0px 0px var(--red-key-shadow-color);
+}
+
+/* Active states */
+.preload * {
+  -webkit-transition: none !important;
+  -moz-transition: none !important;
+  -ms-transition: none !important;
+  -o-transition: none !important;
+}
