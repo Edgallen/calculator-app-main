@@ -10,6 +10,7 @@
   --input-background-color: hsl(224, 36%, 15%);
 
   /* Text */
+  --text-alter-color: hsl(229, 6%, 61%);
   --text-color: hsl(221, 14%, 31%);
   --white-color: rgb(255, 255, 255);
 
@@ -124,7 +125,8 @@ span {
   background-color: var(--grey-key-color);
   color: var(--text-color);
   box-shadow: 0px 4px var(--grey-key-shadow-color);
-  transition: .5s;
+  transition: .3s;
+  transition-timing-function: cubic-bezier(0.000, 1.105, 0.450, 0.970);
 }
 
 .button:active {
@@ -205,16 +207,25 @@ span {
 
 
 /*=============== CALCULATOR OUTPUT ===============*/
-.calculator__output {
+.calculator__result {
   display: flex;
+  flex-direction: column;
+  align-items: flex-end;
   justify-content: flex-end;
   background-color: var(--input-background-color);
   border-radius:var(--m-0-75);
-  padding: var(--m-1-5) var(--m-2);
+  padding: var(--m-0-75) var(--m-2);
   margin: var(--m-1-5) 0;
+  gap: var(--m-0-5);
+  height: 85px;
 }
 
-.calculator__output-operand {
+.calculator__previousOperand {
+  font-size: var(--normal-font-size);
+  color: var(--text-alter-color);
+}
+
+.calculator__currentOperand {
   font-size: var(--h1-font-size);
   color: var(--white-color);
 }
