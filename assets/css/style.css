@@ -209,6 +209,7 @@ span {
 /*=============== CALCULATOR OUTPUT ===============*/
 .calculator__result {
   display: flex;
+  position: relative;
   flex-direction: column;
   align-items: flex-end;
   justify-content: flex-end;
@@ -221,6 +222,8 @@ span {
 }
 
 .calculator__previousOperand {
+  position: absolute;
+  transform: translate(0px, -40px);
   font-size: var(--normal-font-size);
   color: var(--text-alter-color);
 }
@@ -240,6 +243,7 @@ span {
   grid-template-columns: repeat(4, 60px);
   grid-template-rows: repeat(5, 60px);
   gap: var(--m-1);
+  -webkit-tap-highlight-color: transparent;
 }
 
 .span-two {
