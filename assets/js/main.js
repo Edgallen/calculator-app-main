@@ -14,6 +14,22 @@ class Calculator {
     this.previousOperandTextElement = previousOperandTextElement;
     this.currentOperandTextElement = currentOperandTextElement;
     this.clear();
+/*=============== CHEK IF PAGE LOADED ===============*/ 
+const body = document.getElementsByTagName('body');
+
+// Rome 'transition - none' when page is loaded
+document.onreadystatechange = () => {
+  if (document.readyState === 'complete') {
+    body[0].classList.remove('preload');
+  }
+};
+
+/*=============== CALCULATOR ===============*/
+class Calculator {
+  constructor(previousOperandTextElement, currentOperandTextElement) {
+    this.previousOperandTextElement = previousOperandTextElement;
+    this.currentOperandTextElement = currentOperandTextElement;
+    this.clear();
   }
 
   clear() {
@@ -89,7 +105,7 @@ class Calculator {
         break;
     }
 
-    let computationString = computation.toString()
+    let computationString = computation.toString();
     if (!computationString.length == 13) {
       this.currentOperand = computation;
       console.log(typeof computation)
@@ -102,30 +118,14 @@ class Calculator {
   }
 
   getDisplayNumber(number) {
-    const stringNumber = number.toString()
-    const integerDigits = parseFloat(stringNumber.split('.')[0])
-    const decimalDigits = stringNumber.split('.')[1]
-    let integerDisplay
-    if (isNaN(integerDigits)) {
-      integerDisplay = ''
-    } else {
-      integerDisplay = integerDigits.toLocaleString('en', { maximumFractionDigits: 0 })
-    }
-    if (decimalDigits != null) {
-      return `${integerDisplay}.${decimalDigits}`
-    } else {
-      return integerDisplay
-    }
+   
   }
 
   updateDispay() {
-    this.currentOperandTextElement.innerText =
-      this.getDisplayNumber(this.currentOperand)
+    this.currentOperandTextElement.innerText = this.currentOperand
     if (this.operation != null) {
       this.previousOperandTextElement.innerText =
-        `${this.getDisplayNumber(this.previousOperand)} ${this.operation}`
-    } else {
-      this.previousOperandTextElement.innerText = ''
+        `${this.previousOperand} ${this.operation}`
     }
   }
 }
