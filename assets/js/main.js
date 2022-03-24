@@ -23,11 +23,15 @@ class Calculator {
   }
 
   delete() {
+    if (this.currentOperand == 'Infinity') {
+      this.currentOperand = '';
+      return
+    }
     this.currentOperand = this.currentOperand.slice(0, -1);
   }
 
   appendNumber(number) {
-    if (currentOperandTextElement.innerText.length == 14){
+    if (currentOperandTextElement.innerText.length == 13){
       return
     };
 
@@ -45,7 +49,7 @@ class Calculator {
   }
 
   chooseOperation(operation) {
-    if (this.currentOperand === ''){
+    if (this.currentOperand === '' || this.currentOperand === '.'){
       return
     }
     if (this.previousOperand !== '') {
@@ -85,20 +89,43 @@ class Calculator {
         break;
     }
 
-    this.currentOperand = computation.toString();
+    let computationString = computation.toString()
+    if (!computationString.length == 13) {
+      this.currentOperand = computation;
+      console.log(typeof computation)
+    } else {
+      this.currentOperand = computationString.slice(0, (computationString.length - (computationString.length - 13)));
+    }
+
     this.previousOperand = '';
     this.operation = '';
   }
 
   getDisplayNumber(number) {
-
+    const stringNumber = number.toString()
+    const integerDigits = parseFloat(stringNumber.split('.')[0])
+    const decimalDigits = stringNumber.split('.')[1]
+    let integerDisplay
+    if (isNaN(integerDigits)) {
+      integerDisplay = ''
+    } else {
+      integerDisplay = integerDigits.toLocaleString('en', { maximumFractionDigits: 0 })
+    }
+    if (decimalDigits != null) {
+      return `${integerDisplay}.${decimalDigits}`
+    } else {
+      return integerDisplay
+    }
   }
 
   updateDispay() {
-    this.currentOperandTextElement.innerText = this.currentOperand;
+    this.currentOperandTextElement.innerText =
+      this.getDisplayNumber(this.currentOperand)
     if (this.operation != null) {
-      this.previousOperandTextElement.innerText = 
-        `${this.previousOperand} ${this.operation}`
+      this.previousOperandTextElement.innerText =
+        `${this.getDisplayNumber(this.previousOperand)} ${this.operation}`
+    } else {
+      this.previousOperandTextElement.innerText = ''
     }
   }
 }
