@@ -1,4 +1,4 @@
-/*=============== CHEK IF PAGE LOADED ===============*/ 
+/*=============== CHECK IF PAGE LOADED ===============*/ 
 const html = document.getElementsByTagName('html');
 
 // Rome 'transition - none' when page is loaded
@@ -31,7 +31,7 @@ class Calculator {
   }
 
   appendNumber(number) {
-    if (currentOperandTextElement.innerText.length == 13){
+    if (currentOperandTextElement.innerText.length == 14){
       return
     };
 
@@ -90,11 +90,10 @@ class Calculator {
     }
 
     let computationString = computation.toString();
-    if (!computationString.length == 13) {
+    if (!computationString.length == 11) {
       this.currentOperand = computation;
-      console.log(typeof computation)
     } else {
-      this.currentOperand = computationString.slice(0, (computationString.length - (computationString.length - 13)));
+      this.currentOperand = computationString.slice(0, (computationString.length - (computationString.length - 11)));
     }
 
     this.previousOperand = '';
@@ -102,14 +101,30 @@ class Calculator {
   }
 
   getDisplayNumber(number) {
-   
+    const stringNumber = number.toString()
+    const integerDigits = parseFloat(stringNumber.split('.')[0])
+    const decimalDigits = stringNumber.split('.')[1]
+    let integerDisplay
+    if (isNaN(integerDigits)) {
+      integerDisplay = ''
+    } else {
+      integerDisplay = integerDigits.toLocaleString('en', { maximumFractionDigits: 0 })
+    }
+    if (decimalDigits != null) {
+      return `${integerDisplay}.${decimalDigits}`
+    } else {
+      return integerDisplay
+    }
   }
 
   updateDispay() {
-    this.currentOperandTextElement.innerText = this.currentOperand
+    this.currentOperandTextElement.innerText =
+      this.getDisplayNumber(this.currentOperand)
     if (this.operation != null) {
       this.previousOperandTextElement.innerText =
-        `${this.previousOperand} ${this.operation}`
+        `${this.getDisplayNumber(this.previousOperand)} ${this.operation}`
+    } else {
+      this.previousOperandTextElement.innerText = ''
     }
   }
 }
@@ -167,10 +182,8 @@ function themeChange() {
       selectorButtonClassList.toggle('selector__step-2');
       break;
     case 'light__theme':
-      bodyClassList.toggle('light__theme');
-      bodyClassList.toggle('purple__theme');
-      selectorButtonClassList.toggle('selector__step-2');
-      selectorButtonClassList.toggle('selector__step-3');
+      bodyClassList.replace('light__theme', 'purple__theme');
+      selectorButtonClassList.replace('selector__step-2', 'selector__step-3');
       break;
     case 'purple__theme':
       bodyClassList.toggle('purple__theme');
