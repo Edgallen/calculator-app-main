@@ -12,17 +12,19 @@
   /* Text */
   --text-alter-color: hsl(229, 6%, 61%);
   --text-color: hsl(221, 14%, 31%);
-  --white-color: rgb(255, 255, 255);
+  --title-color: rgb(255, 255, 255);
+  --operation-text-color: rgb(255, 255, 255);
+  --equals-text-color: rgb(255, 255, 255);
 
   /* Keys */
-  --red-key-color: hsl(6, 63%, 50%);
-  --blue-key-color: hsl(225, 21%, 49%);
-  --grey-key-color: hsl(30, 25%, 89%);
+  --selector-key-color: hsl(6, 63%, 50%);
+  --operation-key-color: hsl(225, 21%, 49%);
+  --number-key-color: hsl(30, 25%, 89%);
 
   /* Shadow */
-  --red-key-shadow-color: hsl(6, 70%, 34%);
-  --blue-key-shadow-color: hsl(224, 28%, 35%);
-  --grey-key-shadow-color: hsl(28, 16%, 65%);
+  --selector-key-shadow-color: hsl(6, 70%, 34%);
+  --operation-key-shadow-color: hsl(224, 28%, 35%);
+  --number-key-shadow-color: hsl(28, 16%, 65%);
   
   /*========== Font and typography ==========*/
   --body-font: 'Spartan', sans-serif;
@@ -57,6 +59,54 @@
   --z-fixed: 100;
 }
 
+.light__theme {
+  /* Background */
+  --background-color: hsl(0, 0%, 90%);
+  --selector-background-color: hsl(0, 5%, 81%);
+  --input-background-color: hsl(0, 0%, 93%);
+
+  /* Text */
+  --text-alter-color: hsl(229, 6%, 61%);
+  --text-color: hsl(221, 14%, 31%);
+  --title-color: hsl(60, 10%, 19%);
+  --operation-text-color: rgb(255, 255, 255);
+  --equals-text-color: rgb(255, 255, 255);
+
+  /* Keys */
+  --selector-key-color: hsl(25, 98%, 40%);
+  --operation-key-color: hsl(185, 42%, 37%);
+  --number-key-color: hsl(45, 7%, 89%);
+
+  /* Shadow */
+  --selector-key-shadow-color: hsl(25, 99%, 27%);
+  --operation-key-shadow-color: hsl(185, 58%, 25%);
+  --number-key-shadow-color: hsl(35, 11%, 61%);
+}
+
+.purple__theme {
+  /* Background */
+  --background-color: hsl(268, 75%, 9%);
+  --selector-background-color: hsl(268, 71%, 12%);
+  --input-background-color: hsl(268, 71%, 12%);
+
+  /* Text */
+  --text-alter-color: hsl(229, 6%, 61%);
+  --text-color: hsl(52, 100%, 62%);
+  --title-color: hsl(52, 100%, 62%);
+  --operation-text-color: rgb(255, 255, 255);
+  --equals-text-color: hsl(198, 20%, 13%);
+
+  /* Keys */
+  --selector-key-color: hsl(176, 100%, 44%);
+  --operation-key-color: hsl(281, 89%, 26%);
+  --number-key-color: hsl(268, 47%, 21%);
+
+  /* Shadow */
+  --selector-key-shadow-color: hsl(177, 92%, 70%);
+  --operation-key-shadow-color: hsl(285, 91%, 52%);
+  --number-key-shadow-color: hsl(290, 70%, 36%);
+}
+
 /*=============== BASE ===============*/
 * {
   box-sizing: border-box;
@@ -66,13 +116,16 @@
 
 html {
   scroll-behavior: smooth;
-  background-color: var(--background-color);
+  /* background-color: var(--background-color); */
+  transition: .4s background-color;
 }
 
 body {
   font-family: var(--body-font);
   display: grid;
   justify-content: center;
+  background-color: var(--background-color);
+  transition: .4s;
 }
 
 h1,h2,h3 {
@@ -122,16 +175,16 @@ span {
   align-items: center;
   font-size: var(--h1-font-size);
   border-radius: var(--m-0-5);
-  background-color: var(--grey-key-color);
+  background-color: var(--number-key-color);
   color: var(--text-color);
-  box-shadow: 0px 4px var(--grey-key-shadow-color);
+  box-shadow: 0px 4px var(--number-key-shadow-color);
   transition: .3s;
   transition-timing-function: cubic-bezier(0.000, 1.105, 0.450, 0.970);
 }
 
 .button:active {
   transform: translate(0px, 4px);
-  box-shadow: 0px 0px var(--grey-key-shadow-color)
+  box-shadow: 0px 0px var(--number-key-shadow-color)
 }
 
 /*=============== LAYOUT ===============*/
@@ -156,7 +209,7 @@ span {
 
 .header__logo {
   font-size: var(--big-font-size);
-  color: var(--white-color);
+  color: var(--title-color);
 }
 
 .header__theme {
@@ -169,7 +222,7 @@ span {
   font-size: var(--smallest-font-size);
   margin-bottom: var(--m-0-25);
   letter-spacing: .08rem;
-  color: var(--white-color);
+  color: var(--title-color);
 }
 
 .header__selector{
@@ -185,24 +238,36 @@ span {
 
 .header__step-number {
   font-size: var(--smallest-font-size);
-  color: var(--white-color);
+  color: var(--title-color);
 }
 
 .header__selector-scroll {
+  position: relative;
   background-color: var(--selector-background-color);
   border-radius: var(--m-1);
   width: 68px;
   padding: 13px;
+  cursor: pointer;
 }
 
-.header__selector-scroll:before {
+.selector__button{
   content: '';
   position: absolute;
   width: 16px;
   height: 16px;
   border-radius: 1rem;
-  background-color: var(--red-key-color);
+  background-color: var(--selector-key-color);
   transform: translate(-9px, -8px);
+  transition: .4s;
+}
+
+/* Active states */
+.selector__step-2 {
+  transform: translate(12px, -8px);
+}
+
+.selector__step-3 {
+  transform: translate(33px, -8px);
 }
 
 
@@ -230,7 +295,7 @@ span {
 
 .calculator__currentOperand {
   font-size: var(--h1-font-size);
-  color: var(--white-color);
+  color: var(--title-color);
 }
 
 /*=============== CALCULATOR BODY ===============*/
@@ -251,25 +316,25 @@ span {
 }
 
 .blue {
-  color: var(--white-color);
+  color: var(--operation-text-color);
   font-size: var(--normal-font-size);
-  background-color: var(--blue-key-color);
-  box-shadow: 0px 4px var(--blue-key-shadow-color);
+  background-color: var(--operation-key-color);
+  box-shadow: 0px 4px var(--operation-key-shadow-color);
 }
 
 .blue:active {
-  box-shadow: 0px 0px var(--blue-key-shadow-color);
+  box-shadow: 0px 0px var(--operation-key-shadow-color);
 }
 
 .red {
   font-size: var(--h3-font-size);
-  color: var(--white-color);
-  background-color: var(--red-key-color);
-  box-shadow: 0px 4px var(--red-key-shadow-color);
+  color: var(--equals-text-color);
+  background-color: var(--selector-key-color);
+  box-shadow: 0px 4px var(--selector-key-shadow-color);
 }
 
 .red:active {
-  box-shadow: 0px 0px var(--red-key-shadow-color);
+  box-shadow: 0px 0px var(--selector-key-shadow-color);
 }
 
 /* Active states */

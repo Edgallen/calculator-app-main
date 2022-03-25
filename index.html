@@ -1,5 +1,7 @@
 <!DOCTYPE html>
   <html lang="en">
+<!DOCTYPE html>
+  <html class="preload" lang="en">
     <head>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,7 +14,7 @@
       
       <title>Frontend Mentor | Calculator app</title>
 
-    <body class="preload">
+    <body class="">
 
       <!--=============== HEADER ===============-->
       <header class="header">
@@ -28,15 +30,17 @@
               <span class="header__step-number">3</span>
             </div>
 
-            <div class="header__selector-scroll"></div>
+            <div class="header__selector-scroll">
+              <div class="selector__button"></div>
+            </div>
           </div>
         </div>
       </header>
       <!--=============== CALCULATOR ===============-->
       <div class="calculator__container grid">
         <div class="calculator__result">
-          <div class="calculator__previousOperand"></div>
-          <div class="calculator__currentOperand"></div>
+          <div class="calculator__previousOperand"> </div>
+          <div class="calculator__currentOperand"> </div>
         </div>
 
         <div class="calculator__body">
@@ -52,7 +56,7 @@
           <button class="calculator__body-number button">2</button>
           <button class="calculator__body-number button">3</button>
           <button class="calculator__body-operation button">-</button>
-          <button class="calculator__body-operation button">.</button>
+          <button class="calculator__body-number button">.</button>
           <button class="calculator__body-number button">0</button>
           <button class="calculator__body-operation button">/</button>
           <button class="calculator__body-operation button">x</button>

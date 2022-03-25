@@ -1,10 +1,10 @@
 /*=============== CHEK IF PAGE LOADED ===============*/ 
-const body = document.getElementsByTagName('body');
+const html = document.getElementsByTagName('html');
 
 // Rome 'transition - none' when page is loaded
 document.onreadystatechange = () => {
   if (document.readyState === 'complete') {
-    body[0].classList.remove('preload');
+    html[0].classList.remove('preload');
   }
 };
 
@@ -152,3 +152,31 @@ resetButton.addEventListener('click', button => {
   calculator.clear();
   calculator.updateDispay();
 });
+
+/*=============== THEME ===============*/
+const themeSelector = document.querySelector('.header__selector-scroll');
+const selectorButtonClassList = document.querySelector('.selector__button').classList;
+const bodyClassList = document.getElementsByTagName('body')[0].classList;
+const body = document.getElementsByTagName('body');
+
+function themeChange() {
+  
+  switch (bodyClassList[0]) {
+    case undefined:
+      bodyClassList.toggle('light__theme');
+      selectorButtonClassList.toggle('selector__step-2');
+      break;
+    case 'light__theme':
+      bodyClassList.toggle('light__theme');
+      bodyClassList.toggle('purple__theme');
+      selectorButtonClassList.toggle('selector__step-2');
+      selectorButtonClassList.toggle('selector__step-3');
+      break;
+    case 'purple__theme':
+      bodyClassList.toggle('purple__theme');
+      selectorButtonClassList.toggle('selector__step-3');
+      break;
+  }
+}
+
+themeSelector.addEventListener('click', themeChange);
