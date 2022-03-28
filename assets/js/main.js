@@ -31,7 +31,9 @@ class Calculator {
   }
 
   appendNumber(number) {
-    if (currentOperandTextElement.innerText.length == 14){
+    let textElement = currentOperandTextElement.innerText;
+
+    if (currentOperandTextElement.innerText.length == checkDesktop(textElement)){
       return
     };
 
@@ -89,11 +91,11 @@ class Calculator {
         break;
     }
 
-    let computationString = computation.toString();
-    if (!computationString.length == 11) {
+    let computationString =  computation.toString();
+    if (!computationString.length == checkDesktop(computationString)) {
       this.currentOperand = computation;
     } else {
-      this.currentOperand = computationString.slice(0, (computationString.length - (computationString.length - 11)));
+      this.currentOperand = computationString.slice(0, (computationString.length - (computationString.length - checkDesktop(computationString))));
     }
 
     this.previousOperand = '';
@@ -136,6 +138,19 @@ const deleteButton = document.querySelector('.calculator__body-delete');
 const resetButton = document.querySelector('.calculator__body-reset');
 const currentOperandTextElement = document.querySelector('.calculator__currentOperand');
 const previousOperandTextElement = document.querySelector('.calculator__previousOperand');
+
+function checkDesktop(string) {
+  let screenWidth = window.screen.width;
+  let stringLength;
+
+  if (string.includes(',')) {
+    screenWidth >= 1024 ? stringLength = 18 : stringLength = 14;
+  } else {
+    screenWidth >= 1024 ? stringLength = 14 : stringLength = 11;
+  }
+
+  return stringLength
+};
 
 const calculator = new Calculator(previousOperandTextElement, currentOperandTextElement);
 
